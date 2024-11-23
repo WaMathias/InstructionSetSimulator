@@ -1,4 +1,4 @@
-use crate::memory;
+use crate::{instructions, memory};
 
 pub struct CPU {
     pub registers: [u8; 4],
@@ -16,7 +16,7 @@ impl CPU {
     }
 
     pub fn load_program(&mut self, program: &[u8]) {
-        self.memory.load(0, program);
+        self.memory.load(0, program); // Das Laden des Programms bleibt gleich.
     }
 
     pub fn fetch(&mut self) -> u8 {
@@ -32,5 +32,9 @@ impl CPU {
                 break;
             }
         }
+    }
+
+    fn execute(&mut self, instr: u8) -> bool {
+        instructions::decode_and_execute(self, instr)
     }
 }

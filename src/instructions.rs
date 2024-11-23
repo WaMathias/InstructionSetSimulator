@@ -5,6 +5,10 @@ pub fn decode_and_execute(cpu: &mut CPU, opcode: u8) -> bool {
         0x01 => { // LOAD
             let reg = cpu.fetch() as usize;
             let addr = cpu.fetch();
+            // Überprüfung, ob die Adresse gültig ist
+            if addr >= 0xFF { // Angenommene gültige Adresse für 256 Byte Speicher
+                panic!("Ungültige Adresse: 0x{:X}", addr);
+            }
             cpu.registers[reg] = cpu.memory.read(addr as u16);
         }
         0x02 => { // ADD
