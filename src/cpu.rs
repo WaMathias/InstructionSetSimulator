@@ -102,5 +102,17 @@ impl CPU {
         println!("Accumulator geladen: {}", self.acc);
     }
 
+    fn or(&mut self, value: u32) {
+        self.acc |= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
 
+    fn xor(&mut self, value: u32) {
+        self.acc ^= value;
+    }
+
+    fn shl(&mut self, value: u32) {
+        self.acc <<= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
 }
