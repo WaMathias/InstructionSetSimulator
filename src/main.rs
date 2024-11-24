@@ -1,16 +1,23 @@
+// main.rs
 mod cpu;
-mod memory;
 mod instructions;
+mod memory;
+
+use cpu::CPU;
+use instructions::*;
+use memory::Memory;
 
 fn main() {
-    let mut cpu = cpu::CPU::new();
+    let mut cpu = CPU::new(256); // Erstelle eine CPU mit 256 Bytes Speicher
+    let mut memory = Memory::new(256); // Erstelle den Speicher
 
-    // Beispielprogramm: [Opcode, Argumente, ...]
-    cpu.load_program(&[
-        0x01, 0x00, 0x10, // LOAD R0, 0x10
-        0x02, 0x01, 0x00, // ADD R1, R0
-        0xFF,             // HALT
-    ]);
+    // Lade eine Instruktion in den Speicher
+    memory.write(0, ADD);
+    memory.write(1, LOAD);
+    memory.write(2, STORE);
 
-    cpu.run();
+    // Simuliere das Ausführen der Instruktionen
+    cpu.execute(memory.read(0)); // Add
+    cpu.execute(memory.read(1)); // Load
+    cpu.execute(memory.read(2)); // Store
 }
