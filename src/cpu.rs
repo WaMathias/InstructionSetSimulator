@@ -74,12 +74,12 @@ impl CPU {
         }
     }
 
-    fn inc(&mut self, value: u32) {
+    fn inc(&mut self) {
         self.acc = self.acc + 1;
         println!("Accumulator geladen: {}", self.acc);
     }
 
-    fn dec(&mut self, value: u32) {
+    fn dec(&mut self) {
         self.acc = self.acc - 1;
         println!("Accumulator geladen: {}", self.acc);
     }
