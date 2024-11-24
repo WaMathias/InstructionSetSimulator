@@ -19,3 +19,5 @@ impl Memory {
         self.memory[address] = value;
     }
 }
+
+// TODO: Speicherinitialiserung, Daten lesen, Daten schreiben, Speicher löschen, Speicher Dump, Speicherbereich kopieren, Speicher vergleichen, Blcokweises Laden, Speicherbereich schützen, Speichergröße anpassen, Speichersperren,
