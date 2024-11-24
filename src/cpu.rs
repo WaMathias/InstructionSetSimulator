@@ -63,4 +63,44 @@ impl CPU {
         self.acc /= value;
         println!("Accumulator geladen: {}", self.acc);
     }
+
+    fn cmp(&mut self, value: u32) {
+        if self.acc == value {
+            self.status = 0x01;
+            println!("Accumulator ist gleich dem Wert: {}", self.acc);
+        } else {
+            self.status = 0x00;
+            println!("Accumulator ist ungleich dem wert: {}", self.acc);
+        }
+    }
+
+    fn inc(&mut self, value: u32) {
+        self.acc = self.acc + 1;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn dec(&mut self, value: u32) {
+        self.acc = self.acc - 1;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn jmp(&mut self, address: usize) { // undefined value of address
+        self.pc = address as u32; // redefinition of address
+    }
+
+    fn jz(&mut self, address: usize) {
+        if self.acc == 0 {
+            self.pc = address as u32;
+            println!("Wert {} im Speicher an Adresse {}", self.acc, address);
+        } else {
+            println!("Not Zero, continuing...")
+        }
+    }
+
+    fn and(&mut self, value: u32) {
+        self.acc &= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+
 }
