@@ -40,7 +40,13 @@ impl Memory {
         }
     }
 
-    //fn compare(&mut self, )
+    fn compare(&mut self, addr1: usize, addr2: usize, length: usize) -> bool {
+        self.memory[addr1..length] == self.memory[addr2..length] // should be 'addr1..addr1+length'
+    }
+
+    fn resize(&mut self, new_size: usize, default_value: u8) {
+        self.memory.resize(new_size, default_value)
+    }
 }
 
 // TODO: Speicherinitialiserung, Daten lesen, Daten schreiben, Speicher löschen, Speicher Dump, Speicherbereich kopieren, Speicher vergleichen, Blcokweises Laden, Speicherbereich schützen, Speichergröße anpassen, Speichersperren,
