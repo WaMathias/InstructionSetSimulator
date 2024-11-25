@@ -4,6 +4,7 @@ pub struct CPU {
     pub acc: u32, // Accumulator (für arithmetische Operationen)
     pub status: u8, // Status Register (einfach gehalten)
     pub memory: Vec<u8>, // Simulierter Speicher
+    // TODO: Satisfy Linter with implementing pc and status
 }
 
 impl CPU {
