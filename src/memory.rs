@@ -47,6 +47,16 @@ impl Memory {
     fn resize(&mut self, new_size: usize, default_value: u8) {
         self.memory.resize(new_size, default_value)
     }
+
+    fn protect(&mut self, start_addr: usize, end_addr: usize) {
+        for addr in start_addr..end_addr {
+            self.protect(start_addr, end_addr)
+        }
+    }
+
+    fn lock(&mut self, start_addr: usize, end_addr: usize) {
+        self.lock(start_addr, end_addr)
+    }
 }
 
 // TODO: Speicherinitialiserung, Daten lesen, Daten schreiben, Speicher löschen, Speicher Dump, Speicherbereich kopieren, Speicher vergleichen, Blcokweises Laden, Speicherbereich schützen, Speichergröße anpassen, Speichersperren,
