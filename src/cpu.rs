@@ -141,5 +141,11 @@ impl CPU {
         // TODO: implementing this thing
     }
 
+    fn modulu(&mut self, value: u32) { // equivalent to 'pub const MOD', just changed name, because inconvenience with the mod crate
+        self.acc = self.acc % value
+    }
 
+    fn neg(&mut self) {
+        self.acc = (-self.acc as i32) as u32; /* FIX */
+    }
 }
