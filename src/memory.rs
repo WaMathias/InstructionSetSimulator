@@ -1,7 +1,7 @@
 // memory.rs
 
 pub struct Memory {
-    pub memory: Vec<u8>,
+    pub memory: Vec<u16>,
 }
 
 impl Memory {
@@ -11,18 +11,18 @@ impl Memory {
         }
     }
 
-    pub fn read(&self, address: usize) -> u8 {
+    pub fn read(&self, address: usize) -> u16 {
         self.memory[address]
     }
 
-    pub fn write(&mut self, address: usize, value: u8) {
+    pub fn write(&mut self, address: usize, value: u16) {
         self.memory[address] = value;
     }
 
-    pub fn init_memory(&mut self, size: usize, default_value: u8) -> Vec<u8> {
+    pub fn init_memory(&mut self, size: usize, default_value: u16) -> Vec<u16> {
         vec![default_value; size]
     }
-    pub fn clear(&mut self, default_value: u8) {
+    pub fn clear(&mut self, default_value: u16) {
         for byte in self.memory.iter_mut() {
             *byte = default_value;
         }
@@ -44,7 +44,7 @@ impl Memory {
         self.memory[addr1..length] == self.memory[addr2..length] // should be 'addr1..addr1+length'
     }
 
-    fn resize(&mut self, new_size: usize, default_value: u8) {
+    fn resize(&mut self, new_size: usize, default_value: u16) {
         self.memory.resize(new_size, default_value)
     }
 
