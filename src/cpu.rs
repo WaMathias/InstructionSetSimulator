@@ -4,6 +4,7 @@ pub struct CPU {
     pub acc: u32, // Accumulator (für arithmetische Operationen)
     pub status: u8, // Status Register (einfach gehalten)
     pub memory: Vec<u8>, // Simulierter Speicher
+    pub stack: Vec<u32>,
     // TODO: Satisfy Linter with implementing pc and status
 }
 
@@ -15,6 +16,7 @@ impl CPU {
             acc: 0,
             status: 0,
             memory: vec![0; memory_size],
+            stack: vec![0],
         }
     }
 
@@ -130,4 +132,14 @@ impl CPU {
     fn nop(&mut self) {
         // do nothing and skip
     }
+
+    fn push(&mut self) {
+        self.stack.push(self.acc)
+    }
+
+    fn pop(&mut self) {
+        // TODO: implementing this thing
+    }
+
+
 }
