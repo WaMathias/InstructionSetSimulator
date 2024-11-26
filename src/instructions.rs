@@ -1,17 +1,19 @@
 // instructions.rs
 
-pub const ADD: u8 = 0x01;
-pub const LOAD: u8 = 0x02;
-pub const STORE: u8 = 0x03;
-pub const SUB: u8 = 0x04;
-pub const MUL: u8 = 0x05;
-pub const DIV: u8 = 0x06;
-pub const CMP: u8 = 0x07;
-pub const INC: u8 = 0x08;
-pub const DEC: u8 = 0x09;
-pub const JMP: u8 = 0x0A;
-pub const JZ: u8 = 0x0B; // Jump if Zero Operation
-pub const AND: u8 = 0x0C;
-pub const OR: u8 = 0x0D;
-pub const XOR: u8 = 0x0E;
-pub const SHL: u8 = 0x0F; // moves bits of accumulators to the left side
+use std::ops::Add;
+
+pub const ADD: u16 = 0x0100;
+pub const LOAD: u16 = 0x0101;
+pub const STORE: u16 = 0x0102;
+pub const SUB: u16 = 0x0103;
+pub const MUL: u16 = 0x0104;
+pub const DIV: u16 = 0x0105;
+pub const CMP: u16 = 0x0106;
+pub const INC: u16 = 0x0107;
+pub const DEC: u16 = 0x0108;
+pub const JMP: u16 = 0x0109;
+pub const JZ: u16 = 0x0110; // Jump if Zero Operation
+pub const AND: u16 = 0x0111;
+pub const OR: u16 = 0x0112;
+pub const XOR: u16 = 0x0113;
+pub const SHL: u16 = 0x0114; // moves bits of accumulators to the left side
