@@ -55,6 +55,4 @@ impl Memory {
     fn lock(&mut self, start_addr: usize, end_addr: usize) {
         self.lock(start_addr, end_addr) // TODO: satisfy compiler with loop in short future
     }
-
-
 }

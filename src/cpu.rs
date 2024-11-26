@@ -146,6 +146,6 @@ impl CPU {
     }
 
     fn neg(&mut self) {
-        self.acc = (-self.acc as i32) as u32; /* FIX */
+        // self.acc = (-self.acc as i32) as u32; /* FIX */
     }
 }
