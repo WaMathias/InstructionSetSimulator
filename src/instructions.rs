@@ -17,3 +17,6 @@ pub const AND: u16 = 0x0111;
 pub const OR: u16 = 0x0112;
 pub const XOR: u16 = 0x0113;
 pub const SHL: u16 = 0x0114; // moves bits of accumulators to the left side
+pub const SHR: u16 = 0x0115;
+pub const LDI: u16 = 0x0116;
+pub const NOP: u16 = 0x0117;
