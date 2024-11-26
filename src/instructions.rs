@@ -18,6 +18,9 @@ pub const SHL: u16 = 0x0114; // moves bits of accumulators to the left side
 pub const SHR: u16 = 0x0115;
 pub const LDI: u16 = 0x0116; // load immediate
 pub const NOP: u16 = 0x0117;
+
+// implemented in cpu.rs until here
+
 pub const PUSH: u16 = 0x0118; // Wert auf Stack festlegen
 pub const POP: u16 = 0x0119; // Wert vom Stack nehmen
 pub const CALL: u16 = 0x0120; // call function
@@ -30,3 +33,12 @@ pub const TEST: u16 = 0x0126; // test if a specific bit is set in acc and set fl
 pub const NOT: u16 = 0x0127; // negiert auch alle bits im acc
 pub const ROL: u16 = 0x0128; //rotates all bits in the accumulators to the left side
 pub const ROR: u16 = 0x0129; // rotates to the left side
+pub const IN: u16 = 0x0130; // reads value from input device
+pub const OUT: u16 = 0x0131; // gives value to output device
+pub const INT: u16 = 0x0132; // interrupt
+pub const IRET: u16 = 0x0133; // before interrupt
+pub const HALT: u16 = 0x0134; // holds cpu
+pub const WAIT: u16 = 0x0135; // idles and wait for something
+pub const STEP: u16 = 0x0136; // executes one order and then waits
+pub const CLR: u16 = 0x0137; // deletes memory
+pub const RNG: u16 = 0x0138; // creates random value in acc
