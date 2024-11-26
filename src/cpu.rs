@@ -116,4 +116,18 @@ impl CPU {
         self.acc <<= value;
         println!("Accumulator geladen: {}", self.acc);
     }
+
+    fn shr(&mut self, value: u32) {
+        self.acc >>= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn ldi(&mut self, value: u32) {
+        self.acc = value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn nop(&mut self) {
+        // do nothing and skip
+    }
 }

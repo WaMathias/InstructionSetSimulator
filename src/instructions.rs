@@ -1,7 +1,5 @@
 // instructions.rs
 
-use std::ops::Add;
-
 pub const ADD: u16 = 0x0100;
 pub const LOAD: u16 = 0x0101;
 pub const STORE: u16 = 0x0102;
@@ -18,5 +16,17 @@ pub const OR: u16 = 0x0112;
 pub const XOR: u16 = 0x0113;
 pub const SHL: u16 = 0x0114; // moves bits of accumulators to the left side
 pub const SHR: u16 = 0x0115;
-pub const LDI: u16 = 0x0116;
+pub const LDI: u16 = 0x0116; // load immediate
 pub const NOP: u16 = 0x0117;
+pub const PUSH: u16 = 0x0118; // Wert auf Stack festlegen
+pub const POP: u16 = 0x0119; // Wert vom Stack nehmen
+pub const CALL: u16 = 0x0120; // call function
+pub const RET: u16 = 0x0121; // return of function
+pub const MOD: u16 = 0x0122; // berechnet den Rest
+pub const NEG: u16 = 0x0123; // negiert den Wert
+pub const SET_FLAG: u16 = 0x0124; // Zero, Carry, Overflow
+pub const CLR_FLAG: u16 = 0x0125; // removes flag
+pub const TEST: u16 = 0x0126; // test if a specific bit is set in acc and set flag
+pub const NOT: u16 = 0x0127; // negiert auch alle bits im acc
+pub const ROL: u16 = 0x0128; //rotates all bits in the accumulators to the left side
+pub const ROR: u16 = 0x0129; // rotates to the left side
