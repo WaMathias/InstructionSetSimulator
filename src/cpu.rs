@@ -1,4 +1,6 @@
 // cpu.rs
+
+#[warn(dead_code)]
 pub struct CPU {
     pub pc: u32,  // Program Counter
     pub acc: u32, // Accumulator (für arithmetische Operationen)
@@ -21,11 +23,34 @@ impl CPU {
     }
 
     // Methode zum Ausführen von Instruktionen
-    pub fn execute(&mut self, instruction: u8) {
+    pub fn execute(&mut self, instruction: u16) {
         match instruction {
-            0x01 => self.add(5), // Beispiel: ADD Instruktion
-            0x02 => self.load(10), // Beispiel: LOAD Instruktion
-            0x03 => self.store(20), // Beispiel: STORE Instruktion
+            0x0100 => self.add(5), // Beispiel: ADD Instruktion
+            0x0101 => self.load(10), // Beispiel: LOAD Instruktion
+            0x0102 => self.store(20), // Beispiel: STORE Instruktion
+            0x0103 => self.sub(10),
+            0x0104 => self.mul(20),
+            0x0105 => self.div(10),
+            0x0106 => self.cmp(50),
+            0x0107 => self.inc(),
+            0x0108 => self.dec(),
+            0x0109 => self.jmp(3),
+            0x0110 => self.jz(3),
+            0x0111 => self.and(3),
+            0x0112 => self.or(32),
+            0x0113 => self.xor(68),
+            0x0114 => self.shl(654),
+            0x0115 => self.shr(2345),
+            0x0116 => self.ldi(234),
+            0x0117 => self.nop(),
+            0x0118 => self.push(),
+            0x0119 => self.pop(),
+            0x0120 => self.call(69),
+            0x0121 => self.ret(),
+            0x0122 => self.modulu(32),
+
+            // TODO: Fix everything, a lot implementations
+
             _ => println!("Unbekannte Instruktion"),
         }
     }
@@ -138,16 +163,16 @@ impl CPU {
         self.stack.push(self.acc)
     }
 
-    fn pop(&mut self) -> Option<i32> {
-        self.stack.pop()
+    fn pop(&mut self) {
+        self.stack.pop();
     }
 
-    fn call(&mut self, return_address: i32) {
-        self.push(return_address)
+    fn call(&mut self, _return_address: i32) {
+        self.push();
     }
 
     fn ret(&mut self) {
-        self.pop()
+        self.pop();
     }
 
     fn modulu(&mut self, value: u32) { // equivalent to 'pub const MOD', just changed name, because inconvenience with the mod crate
