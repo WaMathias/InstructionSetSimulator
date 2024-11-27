@@ -137,6 +137,8 @@ impl CPU {
         self.stack.push(self.acc)
     }
 
+    fn push(&mut self)
+
     fn pop(&mut self) {
         // TODO: implementing this thing
     }
