@@ -131,16 +131,23 @@ impl CPU {
 
     fn nop(&mut self) {
         // do nothing and skip
+        println!("Nicht wird gemacht")
     }
 
     fn push(&mut self) {
         self.stack.push(self.acc)
     }
 
-    fn push(&mut self)
+    fn pop(&mut self) -> Option<i32> {
+        self.stack.pop()
+    }
 
-    fn pop(&mut self) {
-        // TODO: implementing this thing
+    fn call(&mut self, return_address: i32) {
+        self.push(return_address)
+    }
+
+    fn ret(&mut self) {
+        self.pop()
     }
 
     fn modulu(&mut self, value: u32) { // equivalent to 'pub const MOD', just changed name, because inconvenience with the mod crate
