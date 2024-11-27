@@ -52,6 +52,8 @@ pub const LDI: u16 = 0x0116; // load immediate
 // NOP: Performs no operation (No Operation).
 pub const NOP: u16 = 0x0117;
 
+// Implemented until here ---------------------------------
+
 // PUSH: Pushes a value onto the stack.
 pub const PUSH: u16 = 0x0118; // Value to stack
 

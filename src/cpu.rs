@@ -1,10 +1,13 @@
+// cpu.rs
+
 #[warn(dead_code)]
 pub struct CPU {
-    pub pc: u32,         // Program Counter
-    pub acc: u32,        // Accumulator (für arithmetische Operationen)
-    pub status: u8,      // Status Register (Flags)
+    pub pc: u32,  // Program Counter
+    pub acc: u32, // Accumulator (für arithmetische Operationen)
+    pub status: u8, // Status Register (einfach gehalten)
     pub memory: Vec<u8>, // Simulierter Speicher
-    pub stack: Vec<u32>, // Stack für Call/Ret
+    pub stack: Vec<u32>,
+    // TODO: Satisfy Linter with implementing pc and status
 }
 
 impl CPU {
@@ -15,16 +18,16 @@ impl CPU {
             acc: 0,
             status: 0,
             memory: vec![0; memory_size],
-            stack: Vec::new(), // Kein voreingestellter Wert
+            stack: vec![0],
         }
     }
 
     // Methode zum Ausführen von Instruktionen
     pub fn execute(&mut self, instruction: u16) {
         match instruction {
-            0x0100 => self.add(5),
-            0x0101 => self.load(10),
-            0x0102 => self.store(20),
+            0x0100 => self.add(5), // Beispiel: ADD Instruktion
+            0x0101 => self.load(10), // Beispiel: LOAD Instruktion
+            0x0102 => self.store(20), // Beispiel: STORE Instruktion
             0x0103 => self.sub(10),
             0x0104 => self.mul(20),
             0x0105 => self.div(10),
@@ -36,16 +39,18 @@ impl CPU {
             0x0111 => self.and(3),
             0x0112 => self.or(32),
             0x0113 => self.xor(68),
-            0x0114 => self.shl(1),
-            0x0115 => self.shr(1),
+            0x0114 => self.shl(654),
+            0x0115 => self.shr(2345),
             0x0116 => self.ldi(234),
             0x0117 => self.nop(),
             0x0118 => self.push(),
             0x0119 => self.pop(),
-            0x0120 => self.call(42),
+            0x0120 => self.call(69),
             0x0121 => self.ret(),
-            0x0122 => self.modulo(32),
-            0x0123 => self.neg(),
+            0x0122 => self.modulu(32),
+
+            // TODO: Fix everything, a lot implementations
+
             _ => println!("Unbekannte Instruktion"),
         }
     }
@@ -124,42 +129,61 @@ impl CPU {
         }
     }
 
+    fn and(&mut self, value: u32) {
+        self.acc &= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn or(&mut self, value: u32) {
+        self.acc |= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn xor(&mut self, value: u32) {
+        self.acc ^= value;
+    }
+
+    fn shl(&mut self, value: u32) {
+        self.acc <<= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn shr(&mut self, value: u32) {
+        self.acc >>= value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn ldi(&mut self, value: u32) {
+        self.acc = value;
+        println!("Accumulator geladen: {}", self.acc);
+    }
+
+    fn nop(&mut self) {
+        // do nothing and skip
+        println!("Nichts wird gemacht")
+    }
+
     fn push(&mut self) {
-        self.stack.push(self.acc);
-        println!("Wert {} auf den Stack gelegt", self.acc);
+        self.stack.push(self.acc)
     }
 
-    fn pop(&mut self) -> Option<u32> {
-        let value = self.stack.pop();
-        println!("Wert vom Stack genommen: {:?}", value);
-        value
+    fn pop(&mut self) {
+        self.stack.pop();
     }
 
-    fn call(&mut self, address: u32) {
+    fn call(&mut self, _return_address: i32) {
         self.push();
-        self.pc = address;
-        println!("Calling subroutine at: {}", self.pc);
     }
 
     fn ret(&mut self) {
-        if let Some(address) = self.pop() {
-            self.pc = address;
-            println!("Returning to: {}", self.pc);
-        }
+        self.pop();
     }
 
-    fn modulo(&mut self, value: u32) {
-        if value != 0 {
-            self.acc %= value;
-            println!("Accumulator: {}", self.acc);
-        } else {
-            println!("Fehler: Division durch 0 im Modulo!");
-        }
+    fn modulu(&mut self, value: u32) { // equivalent to 'pub const MOD', just changed name, because inconvenience with the mod crate
+        self.acc = self.acc % value
     }
 
     fn neg(&mut self) {
-        self.acc = (!self.acc).wrapping_add(1);
-        println!("Accumulator negiert: {}", self.acc);
+        // self.acc = (-self.acc as i32) as u32; /* FIX */
     }
 }
-
