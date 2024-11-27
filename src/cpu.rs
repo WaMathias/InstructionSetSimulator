@@ -1,5 +1,9 @@
 // cpu.rs
 
+use std::io;
+use std::io::Write;
+use rand::Rng;
+
 #[warn(dead_code)]
 pub struct CPU {
     pub pc: u32,  // Program Counter
@@ -43,10 +47,10 @@ impl CPU {
             0x0115 => self.shr(2345),
             0x0116 => self.ldi(234),
             0x0117 => self.nop(),
-            0x0118 => self.push(),
-            0x0119 => self.pop(),
+            0x0118 => self.push(34),
+            0x0119 => self.pop(2345),
             0x0120 => self.call(69),
-            0x0121 => self.ret(),
+            0x0121 => self.ret(435),
             0x0122 => self.modulu(32),
 
             // TODO: Fix everything, a lot implementations
@@ -163,27 +167,103 @@ impl CPU {
         println!("Nichts wird gemacht")
     }
 
-    fn push(&mut self) {
-        self.stack.push(self.acc)
+    fn push(&mut self, value: u32) {
+        //
     }
 
-    fn pop(&mut self) {
-        self.stack.pop();
+    fn pop(&mut self, value: u32) {
+        //
     }
 
-    fn call(&mut self, _return_address: i32) {
-        self.push();
+    fn call(&mut self, value: u32) {
+        //
     }
 
-    fn ret(&mut self) {
-        self.pop();
+    fn ret(&mut self, value: u32) {
+        //
     }
 
-    fn modulu(&mut self, value: u32) { // equivalent to 'pub const MOD', just changed name, because inconvenience with the mod crate
-        self.acc = self.acc % value
+    fn modulu(&mut self, value: u32) {
+        //
     }
 
-    fn neg(&mut self) {
-        // self.acc = (-self.acc as i32) as u32; /* FIX */
+    fn neg(&mut self, value: u32) {
+        //
+    }
+
+    fn set_flag(&mut self, value: u32) {
+        //
+    }
+
+    fn clr_flag(&mut self, value: u32) {
+        //
+    }
+
+    fn test(&mut self, value: u32) {
+        //
+    }
+
+    fn not(&mut self, value: u32) {
+        //
+    }
+
+    fn rol(&mut self, value: u32) {
+        //
+    }
+
+    fn ror(&mut self, value: u32) {
+        //
+    }
+
+    fn input(&mut self, value: u32) -> u32 {
+        let mut input = String::new();
+        println!("Enter a value please (positive integer): ");
+        io::stdout().flush().unwrap();
+        io::stdin().read_line(&mut input).expect("Failed to read line");
+
+        match input.trim().parse::<u32>() {
+            Ok(parsed_value) => parsed_value, // Return the parsed value if successful
+            Err(_) => {
+                println!("Invalid input. Returning the default value: {}", value);
+                value // Return the provided default value if parsing fails
+            }
+        } // TODO: Fixing
+    }
+
+    fn output(&mut self, value: u32) {
+        println!("Giving an output of: {}", value)
+    }
+
+    fn int(&mut self, value: u32) {
+        //
+    }
+
+    fn iret(&mut self, value: u32) {
+        //
+    }
+
+    fn halt(&mut self, value: u32) {
+        //
+    }
+
+    fn wait(&mut self, event: i32) {
+        if event {
+            println!("Implement this shit")
+        }
+    }
+
+    fn step(&mut self, value: u32) {
+        //
+    }
+
+    fn clr(&mut self, value: u32) {
+        //
+    }
+
+    fn rng(&mut self) {
+        let mut rng = rand::thread_rng();
+        let value: u32 = rng.gen_range(0..=u32::MAX);
+        self.acc = value;
+        println!("Zufälliger Wert generiert: {}", self.acc);
     }
 }
