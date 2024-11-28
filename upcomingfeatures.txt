@@ -1,0 +1,20 @@
+Debugging und Analyse
+Breakpoint-System: Erlaube das Setzen von Haltepunkten, bei denen der ISS anhält, um den aktuellen Zustand zu inspizieren.
+Schrittweises Ausführen (Step-Through): Simuliere eine Instruktion nach der anderen, um das Verhalten zu analysieren.
+Speicher-Inspektor: Visualisiere den Speicher, z. B. als Hexdump, um geladene Daten zu prüfen.
+Logging: Zeichne alle ausgeführten Instruktionen und Änderungen des Zustands auf.
+Unterstützung für Programme
+Programm-Lader: Lade Binärdateien oder Textprogramme (z. B. Assembler) in den Speicher.
+I/O-Simulation: Erstelle Peripherie-Emulationen wie Tastatureingaben oder einfache grafische Ausgaben (z. B. Pixel-Framebuffer).
+Erweiterte Architektur-Features
+Interrupt-System: Implementiere Hardware-Interrupts für asynchrone Ereignisse.
+Multithreading: Simuliere mehrere unabhängige Threads oder CPUs.
+Pipeline-Simulation: Baue eine Pipeline nach, um parallele Befehlsausführung zu unterstützen.
+Benutzerfreundlichkeit
+GUI-Integration: Erstelle eine grafische Oberfläche für die Kontrolle und Visualisierung.
+Konfigurationsdateien: Erlaube das Laden von CPU- und Speicherparametern aus Dateien.
+Performance-Monitor: Messe die Simulationsgeschwindigkeit oder CPU-Auslastung.
+Test- und Lernwerkzeuge
+Automatisierte Tests: Erstelle Testfälle, um Programme und Instruktionen auf Korrektheit zu prüfen.
+Statistik-Sammlung: Erfasse Informationen wie die Häufigkeit ausgeführter Instruktionen.
+Lehr-Modus: Zeige Erklärungen zu den Instruktionen während der Ausführung an.

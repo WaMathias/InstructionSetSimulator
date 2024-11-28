@@ -313,3 +313,4 @@ impl CPU {
         println!("Random value generated: {}", self.acc);
     }
 }
+
