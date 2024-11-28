@@ -1,14 +1,14 @@
 // cpu.rs
 
+use rand::Rng;
 use std::io;
 use std::io::Write;
-use rand::Rng;
 
 #[warn(dead_code)]
 pub struct CPU {
-    pub pc: u32,  // Program Counter
-    pub acc: u32, // Accumulator (für arithmetische Operationen)
-    pub status: u8, // Status Register (einfach gehalten)
+    pub pc: u32,         // Program Counter
+    pub acc: u32,        // Accumulator (für arithmetische Operationen)
+    pub status: u8,      // Status Register (einfach gehalten)
     pub memory: Vec<u8>, // Simulierter Speicher
     pub stack: Vec<u32>,
     // TODO: Satisfy Linter with implementing pc and status
@@ -29,8 +29,8 @@ impl CPU {
     // Methode zum Ausführen von Instruktionen
     pub fn execute(&mut self, instruction: u16) {
         match instruction {
-            0x0100 => self.add(5), // Beispiel: ADD Instruktion
-            0x0101 => self.load(10), // Beispiel: LOAD Instruktion
+            0x0100 => self.add(5),    // Beispiel: ADD Instruktion
+            0x0101 => self.load(10),  // Beispiel: LOAD Instruktion
             0x0102 => self.store(20), // Beispiel: STORE Instruktion
             0x0103 => self.sub(10),
             0x0104 => self.mul(20),
@@ -54,7 +54,6 @@ impl CPU {
             0x0122 => self.modulu(32),
 
             // TODO: Fix everything, a lot implementations
-
             _ => println!("Unbekannte Instruktion"),
         }
     }
@@ -219,7 +218,9 @@ impl CPU {
         let mut input = String::new();
         println!("Enter a value please (positive integer): ");
         io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut input).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
 
         match input.trim().parse::<u32>() {
             Ok(parsed_value) => parsed_value, // Return the parsed value if successful
@@ -246,12 +247,6 @@ impl CPU {
         //
     }
 
-    fn wait(&mut self, event: i32) {
-        if event {
-            println!("Implement this shit")
-        }
-    }
-
     fn step(&mut self, value: u32) {
         //
     }
@@ -267,3 +262,4 @@ impl CPU {
         println!("Zufälliger Wert generiert: {}", self.acc);
     }
 }
+
