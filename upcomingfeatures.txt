@@ -18,3 +18,7 @@ Test- und Lernwerkzeuge
 Automatisierte Tests: Erstelle Testfälle, um Programme und Instruktionen auf Korrektheit zu prüfen.
 Statistik-Sammlung: Erfasse Informationen wie die Häufigkeit ausgeführter Instruktionen.
 Lehr-Modus: Zeige Erklärungen zu den Instruktionen während der Ausführung an.
+
+
+Und weiter mehr Funktionnen werden dazu kommen. 
+Evtl. auch noch etwas um direkt Daten einzulesen usw.
