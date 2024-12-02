@@ -2,16 +2,16 @@ use rand::Rng;
 use std::io;
 use std::io::Write;
 use std::thread;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 #[warn(dead_code)]
 pub struct CPU {
-    pc: usize,         // Program Counter: Points to the address of the next instruction to be executed in memory
-    acc: u32,          // Accumulator: A register used for arithmetic and logical operations
-    status: u8,        // Status Register: Contains flags that indicate the state of the CPU or the result of operations
-    memory: Vec<u8>,  // Memory: A vector representing the main memory of the CPU, initialized with the specified size
-    stack: Vec<u8>,   // Stack: A vector used as a stack for function calls and returns, initialized with a value of 0
-    current_event: u32 // Current Event: A value representing the current event or state of the CPU
+    pc: usize, // Program Counter: Points to the address of the next instruction to be executed in memory
+    acc: u32,  // Accumulator: A register used for arithmetic and logical operations
+    status: u8, // Status Register: Contains flags that indicate the state of the CPU or the result of operations
+    memory: Vec<u8>, // Memory: A vector representing the main memory of the CPU, initialized with the specified size
+    stack: Vec<u8>, // Stack: A vector used as a stack for function calls and returns, initialized with a value of 0
+    current_event: u32, // Current Event: A value representing the current event or state of the CPU
 }
 
 impl CPU {
@@ -62,7 +62,7 @@ impl CPU {
             0x0118 => self.push(34),
             0x0119 => self.pop(),
             0x0120 => self.call(69),
-            0x0121 => self.ret(),
+            // 0x0121 => self.ret(),
             0x0122 => self.modulu(32),
             // TODO: Fix everything, a lot implementations
             _ => println!("Unknown instruction"),
@@ -198,13 +198,6 @@ impl CPU {
         println!("Calling address: {}", address);
     }
 
-    fn ret(&mut self) {
-        if let Some(return_address) = self.pop() {
-            self.pc = return_address as usize; // Restore the PC from the stack
-            println!("Returning to address: {}", self.pc);
-        }
-    }
-
     fn modulu(&mut self, value: u32) {
         if value != 0 {
             self.acc %= value;
@@ -280,15 +273,24 @@ impl CPU {
         println!("Interrupt return operation (not implemented)");
     }
 
-    fn wait(&mut self, event: u32) {
+    fn wait(&mut self, event: u32, max_wait: Option<Duration>) {
         println!("Waiting for event: {}", event);
+
+        let starttime = Instant::now();
+
         while self.current_event != event {
-            // Optionally, you can add a sleep to avoid busy-waiting
+            if let Some(timeout) = max_wait {
+                if starttime.elapsed() >= timeout {
+                    println!("Timeout reached while waiting for event: {}", event);
+                    return;
+                }
+            }
+
             thread::sleep(Duration::from_millis(100));
             println!("Current event: {}, still waiting...", self.current_event);
         }
-        self.neg(4);
-        println!("Negation called due to wait command.");
+
+        self.neg(event as i32);
     }
 
     fn halt(&mut self, value: u32) {
@@ -313,4 +315,3 @@ impl CPU {
         println!("Random value generated: {}", self.acc);
     }
 }
-

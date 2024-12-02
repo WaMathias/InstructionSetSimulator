@@ -53,9 +53,6 @@ fn main() {
     memory.write(39, RNG);
 
 
-
-
-
     // Simuliere das Ausführen der Instruktionen
     cpu.execute(memory.read(0)); // Add
     cpu.execute(memory.read(1)); // Load
