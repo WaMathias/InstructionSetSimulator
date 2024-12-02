@@ -1,3 +1,5 @@
+// instructions.rs
+
 // ADD: Adds two values and stores the result in the accumulator.
 pub const ADD: u16 = 0x0100;
 
@@ -103,7 +105,7 @@ pub const INT: u16 = 0x0132; // interrupt
 pub const IRET: u16 = 0x0133; // before interrupt
 
 // HALT: Halts the CPU.
-pub const HALT: u16 =  0x0134; // holds cpu
+pub const HALT: u16 = 0x0134; // holds cpu
 
 // WAIT: Idles and waits for an event or condition.
 pub const WAIT: u16 = 0x0135; // idles and wait for something
@@ -116,3 +118,4 @@ pub const CLR: u16 = 0x0137; // deletes memory
 
 // RNG: Generates a random value and stores it in the accumulator.
 pub const RNG: u16 = 0x0138; // creates random value in acc
+

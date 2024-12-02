@@ -7,6 +7,8 @@ use cpu::CPU;
 use instructions::*;
 use memory::Memory;
 
+use std::io;
+
 fn main() {
     let mut cpu = CPU::new(256); // Erstelle eine CPU mit 256 Bytes Speicher
     let mut memory = Memory::new(256); // Erstelle den Speicher
@@ -52,9 +54,51 @@ fn main() {
     memory.write(38, CLR);
     memory.write(39, RNG);
 
-
     // Simuliere das Ausführen der Instruktionen
     cpu.execute(memory.read(0)); // Add
     cpu.execute(memory.read(1)); // Load
     cpu.execute(memory.read(2)); // Store
+
+    run_menu(&mut cpu, &mut memory);
+}
+
+fn run_menu(cpu: &mut CPU, memory: &mut Memory) {
+    loop {
+        println!("\n*** Instrcution Set Simulator ***");
+        println!("1. show memory");
+        println!("2. load program");
+        println!("3. Start execution");
+        println!("4. End");
+
+        let mut input = String::new();
+
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Fehler beim Einlesen");
+
+        match input.trim() {
+            "1" => {
+                println!("Memory content");
+                memory.dump();
+            }
+
+            "2" => {
+                println!("Load Program");
+                let program = vec![0x1234, 0x5678];
+                memory.load_program(&program); // TODO: implement that function
+                println!("Loaded program");
+            }
+
+            "3" => {
+                println!("Start execution...");
+                cpu.run(memory); // TODO: implement that
+            }
+
+            "4" => {
+                println!("Quit program");
+                break;
+            }
+            _ => println!("Invalid option!, please try again"),
+        }
+    }
 }
