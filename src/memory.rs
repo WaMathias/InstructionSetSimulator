@@ -9,6 +9,7 @@ impl Memory {
     pub fn new(size: usize) -> Self {
         Memory {
             memory: vec![0; size],
+            data: vec![0; size],
         }
     }
 
