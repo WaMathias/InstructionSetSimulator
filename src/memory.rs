@@ -2,6 +2,7 @@
 
 pub struct Memory {
     pub memory: Vec<u16>,
+    pub data: Vec<u32>,
 }
 
 impl Memory {
@@ -32,6 +33,13 @@ impl Memory {
         for (i, byte) in self.memory.iter().enumerate() {
             println!("Address: {}: {}", i, byte);
         }
+    }
+
+    pub fn laod_program(&mut self, program: &mut [u16]) {
+        if program.len() > self.data.len() {
+            panic!("Program is too large");
+        }
+        self.data[..program.len().copy_from_slice(program)];
     }
 
     pub fn copy(&mut self, src: usize, dest: usize, length: usize) {
