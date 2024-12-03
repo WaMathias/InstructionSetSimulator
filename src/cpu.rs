@@ -29,6 +29,37 @@ impl CPU {
         }
     }
 
+    pub fn run(&mut self) {
+        loop {
+            // Fetch: Hole die aktuelle Instruktion
+            let instruction = self.fetch_instruction();
+        
+            // Decode und Execute: Führe die Instruktion aus
+            match instruction {
+                Some(instr) => self.execute(instr),
+                None => {
+                    println!("Programm beendet.");
+                    break;
+                }
+            }
+        }
+    }
+
+    // Fetch-Funktion: Liest die nächste Instruktion aus dem Speicher
+    fn fetch_instruction(&mut self) -> Option<u16> {
+        if self.pc < self.memory.len() - 1 {
+            // Nimm 2 Bytes aus dem Speicher und interpretiere sie als `u16`
+            let instr = u16::from_le_bytes([
+                self.memory[self.pc],
+                self.memory[self.pc + 1],
+            ]);
+            self.pc += 2; // Program Counter um 2 erhöhen (16-Bit Instruktionen)
+            Some(instr)
+        } else {
+            None // Keine Instruktionen mehr im Speicher
+        }
+    }
+
     // Method to update the current event
     pub fn update_event(&mut self, new_event: u32) {
         self.current_event = new_event;
@@ -251,7 +282,7 @@ impl CPU {
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line");
-
+ y
         match input.trim().parse::<u32>() {
             Ok(parsed_value) => parsed_value, // Return the parsed value if successful
             Err(_) => {
