@@ -1,5 +1,7 @@
 // memory.rs
 
+use std::convert::AsRef;
+
 pub struct Memory {
     pub memory: Vec<u16>,
     pub data: Vec<u32>,
@@ -36,11 +38,11 @@ impl Memory {
         }
     }
 
-    pub fn laod_program(&mut self, program: &mut [u16]) {
-        if program.len() > self.data.len() {
-            panic!("Program is too large");
+    pub fn load_program(&mut self, slice: &[u16]) {
+        if slice.len() > self.memory.len() {
+            panic!("Slcie is too large for the memory size");
         }
-        self.data[..program.len().copy_from_slice(program)];
+        self.memory[..slice.len()].copy_from_slice(slice);
     }
 
     pub fn copy(&mut self, src: usize, dest: usize, length: usize) {

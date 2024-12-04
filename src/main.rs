@@ -91,7 +91,7 @@ fn run_menu(cpu: &mut CPU, memory: &mut Memory) {
 
             "3" => {
                 println!("Start execution...");
-                cpu.run(memory); // TODO: implement that
+                cpu.run(); // TODO: implement that
             }
 
             "4" => {
