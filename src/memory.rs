@@ -1,7 +1,5 @@
 // memory.rs
 
-use std::convert::AsRef;
-
 pub struct Memory {
     pub memory: Vec<u16>,
     pub data: Vec<u32>,
